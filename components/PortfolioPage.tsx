@@ -7,7 +7,11 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
+  BookOpen,
+  BrainCircuit,
+  CheckCircle2,
   Code2,
+  Database,
   ExternalLink,
   Facebook,
   Github,
@@ -16,43 +20,117 @@ import {
   Mail,
   Music2,
   MoveUpRight,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { ImageZoomModal } from "@/components/ImageZoomModal";
 import { Navbar } from "@/components/Navbar";
 import { PortfolioChatbot } from "@/components/PortfolioChatbot";
+import { fallbackBlogPosts } from "@/lib/blogs";
 import { defaultProfile } from "@/lib/profile";
 import { fallbackProjects } from "@/lib/projects";
 import type { Project } from "@/types/project";
 import type { PortfolioProfile } from "@/types/profile";
 
+const cvProfileFields = {
+  eyebrow: defaultProfile.eyebrow,
+  roles: defaultProfile.roles,
+  hero_description: defaultProfile.hero_description,
+  about_heading: defaultProfile.about_heading,
+  about_body: defaultProfile.about_body,
+  skills: defaultProfile.skills,
+  marquee_items: defaultProfile.marquee_items,
+};
+
 const experience = [
   {
-    period: "2024 - Present",
-    title: "Full Stack Developer",
-    company: "Independent Projects",
-    text: "Building polished marketing sites, authenticated dashboards, project databases, and admin tools with Next.js, Supabase, and TypeScript.",
+    period: "Jan 2026 - Present",
+    title: "Full Stack Engineer",
+    company: "CodeAlpha",
+    text: "Building production MERN features with TypeScript and JavaScript, including REST APIs, JWT auth, middleware, MongoDB data models, and modular React interfaces.",
   },
   {
-    period: "2022 - 2024",
-    title: "Frontend Engineer",
-    company: "Product Interfaces",
-    text: "Designed responsive component systems, landing pages, project galleries, and conversion-focused portfolio experiences with refined motion.",
+    period: "2026 - Present",
+    title: "Founder",
+    company: "DevConnect and Career Compass AI",
+    text: "Designing full-stack products around developer collaboration, AI-assisted career guidance, OpenAI integrations, prompt engineering, and multi-step AI workflows.",
   },
   {
-    period: "2020 - 2022",
-    title: "Web Developer",
-    company: "Client Delivery",
-    text: "Delivered clean websites and web apps with practical SEO, strong accessibility basics, and reliable content workflows.",
+    period: "2023 - 2027",
+    title: "BS Computer Software Engineering",
+    company: "COMSATS University Islamabad, Vehari Campus",
+    text: "Studying software engineering while building real production projects across frontend, backend, databases, authentication, and AI-integrated development.",
   },
 ];
 
 const stats = [
-  ["20+", "Selected builds"],
-  ["5+", "Years crafting UI"],
-  ["100%", "Responsive delivery"],
+  ["5", "Portfolio projects"],
+  ["18+", "Core skills"],
+  ["2026", "CodeAlpha"],
 ];
+
+const engineeringFocus: {
+  title: string;
+  text: string;
+  icon: LucideIcon;
+}[] = [
+  {
+    title: "Backend Reliability",
+    text: "REST APIs, JWT auth, middleware, validation, RBAC, and MongoDB data models built for real workflows.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "AI Product Workflows",
+    text: "OpenAI API integration, prompt design, multi-step agent flows, assessments, and roadmap generation.",
+    icon: BrainCircuit,
+  },
+  {
+    title: "Frontend Systems",
+    text: "Responsive React interfaces, reusable components, Tailwind systems, motion, and admin-ready UX.",
+    icon: Code2,
+  },
+  {
+    title: "Data & Deployment",
+    text: "Database-backed content, Firebase/Supabase-style workflows, GitHub, Vercel, Netlify, and production handoff.",
+    icon: Database,
+  },
+];
+
+const heroSignals = [
+  "Production MERN features at CodeAlpha",
+  "Founder of DevConnect and Career Compass AI",
+  "Available for full-stack and AI-integrated roles",
+];
+
+const projectBlogSlugs: Record<string, string> = {
+  devconnect: "devconnect-platform-architecture",
+  "career-compass-ai": "career-compass-ai-roadmaps",
+  cropmax: "cropmax-agriculture-cms",
+  "construction-company-business-software": "construction-business-software-dashboards",
+  "portfolio-admin-app": "portfolio-admin-app-content-system",
+};
+
+const skillLevels: Record<string, number> = {
+  JavaScript: 92,
+  TypeScript: 88,
+  "React.js": 92,
+  "Tailwind CSS": 90,
+  "Node.js": 88,
+  "Express.js": 86,
+  "Nest.js": 78,
+  MongoDB: 86,
+  "Firebase Firestore": 78,
+  "JWT Authentication": 88,
+  "REST API Design": 88,
+  "OpenAI API": 84,
+  "AI Agent Development": 80,
+  "Prompt Engineering": 86,
+  Git: 84,
+  GitHub: 84,
+  Vercel: 82,
+  Netlify: 78,
+};
 
 const socialPlatforms: {
   name: string;
@@ -76,6 +154,28 @@ function imageWithVersion(src: string, version?: string) {
 
   const separator = src.includes("?") ? "&" : "?";
   return `${src}${separator}v=${encodeURIComponent(version)}`;
+}
+
+function mergeProjectsWithCvProjects(projects: Project[]) {
+  const seen = new Set<string>();
+  return [...fallbackProjects, ...projects].filter((project) => {
+    const key = project.slug || project.id;
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
+}
+
+function applyCvProfile(profile: PortfolioProfile): PortfolioProfile {
+  return {
+    ...profile,
+    ...cvProfileFields,
+    email: defaultProfile.email,
+    social_links: profile.social_links.length ? profile.social_links : defaultProfile.social_links,
+    profile_image_url: profile.profile_image_url || defaultProfile.profile_image_url,
+  };
 }
 
 const fadeUp = {
@@ -183,7 +283,7 @@ export function PortfolioPage() {
 
         const data = (await response.json()) as Project[];
         if (!cancelled && data.length) {
-          setProjects(data);
+          setProjects(mergeProjectsWithCvProjects(data));
         }
       } catch {
         setProjects(fallbackProjects);
@@ -199,7 +299,7 @@ export function PortfolioPage() {
 
         const data = (await response.json()) as PortfolioProfile;
         if (!cancelled) {
-          setProfile(data);
+          setProfile(applyCvProfile(data));
         }
       } catch {
         setProfile(defaultProfile);
@@ -238,11 +338,15 @@ export function PortfolioPage() {
     };
   }, [profile.roles, roleIndex]);
 
-  const featuredProjects = useMemo(() => projects.slice(0, 6), [projects]);
+  const featuredProjects = useMemo(() => projects, [projects]);
   const skills = profile.skills.length ? profile.skills : defaultProfile.skills;
   const marqueeSkills = profile.marquee_items.length
     ? profile.marquee_items
     : defaultProfile.marquee_items;
+  const blogBySlug = useMemo(
+    () => new Map(fallbackBlogPosts.map((post) => [post.slug, post])),
+    []
+  );
   const profileImageSrc = imageWithVersion(profile.profile_image_url, profile.updated_at);
   const socialLabels = profile.social_links.length
     ? profile.social_links
@@ -273,13 +377,13 @@ export function PortfolioPage() {
         <div className="absolute bottom-20 left-[18%] h-24 w-72 rotate-[6deg] rounded-[1.25rem] border border-black/[0.04] bg-[#D6453D]/[0.055]" />
       </motion.div>
 
-      <section id="home" className="relative min-h-screen overflow-hidden pb-28 pt-28">
-        <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-6 lg:min-h-[calc(100vh-12rem)] lg:grid-cols-[1.02fr_0.98fr]">
+      <section id="home" className="relative min-h-screen overflow-hidden pb-32 pt-24 sm:pt-28">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-6 lg:min-h-[calc(100vh-12rem)] lg:grid-cols-[1.04fr_0.96fr]">
           <motion.div initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: smoothEase }}>
-            <p className="inline-flex rounded-full bg-black/[0.04] px-5 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#D6453D]">
+            <p className="inline-flex max-w-full rounded-full bg-black/[0.04] px-4 py-2.5 text-[0.68rem] font-semibold uppercase text-[#D6453D] sm:px-5 sm:py-3 sm:text-xs">
               {profile.eyebrow}
             </p>
-            <h1 className="mt-7 max-w-5xl text-[clamp(3.5rem,9vw,8.25rem)] font-black uppercase leading-[0.86] tracking-[0.03em]">
+            <h1 className="mt-6 max-w-5xl text-[clamp(3rem,16vw,8.25rem)] font-black uppercase leading-[0.86] tracking-[0.03em] sm:mt-7">
               {profile.first_name}
               <span className="block text-[#D6453D]">{profile.last_name}</span>
             </h1>
@@ -291,14 +395,22 @@ export function PortfolioPage() {
               {profile.hero_description}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <a href="#projects" className="group inline-flex items-center gap-2 rounded-md bg-[#111111] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#D6453D]">
+              <a href="#projects" className="premium-button premium-button-dark group">
                 View Work
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
               </a>
-              <a href="#contact" className="group inline-flex items-center gap-2 rounded-md border border-black/[0.12] px-6 py-3.5 text-sm font-semibold text-[#111111] transition hover:border-[#D6453D] hover:text-[#D6453D]">
+              <a href="#contact" className="premium-button premium-button-light group">
                 Contact Me
                 <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
+            </div>
+            <div className="mt-7 grid gap-2 text-sm font-semibold text-[#555555] sm:grid-cols-2">
+              {heroSignals.map((signal) => (
+                <div key={signal} className="flex items-start gap-2 rounded-md border border-black/[0.07] bg-white/35 px-3 py-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D6453D]" />
+                  <span>{signal}</span>
+                </div>
+              ))}
             </div>
             <motion.div
               className="mt-9 flex flex-wrap items-center gap-4"
@@ -326,23 +438,23 @@ export function PortfolioPage() {
             </motion.div>
           </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.85, ease: smoothEase }} className="relative mx-auto w-full max-w-[34rem]">
+        <motion.div initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.85, ease: smoothEase }} className="relative mx-auto w-full max-w-[28rem] lg:max-w-[34rem]">
           <motion.div className="absolute inset-x-8 top-10 h-[28rem] rounded-full bg-[#D6453D]/10 blur-3xl" animate={{ scale: [1, 1.04, 1], opacity: [0.7, 0.95, 0.7] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
           <motion.div whileHover={{ y: -8, rotate: -1.2 }} transition={{ duration: 0.45, ease: smoothEase }} className="relative mx-auto aspect-square w-full max-w-[27.5rem] rounded-full border border-black/[0.08] bg-[#EFE7DD] p-3 shadow-[0_35px_100px_rgba(17,17,17,0.12)]">
             <div className="h-full w-full overflow-hidden rounded-full border border-black/[0.08] bg-black/[0.04]">
               <img src={profileImageSrc} alt={`${profile.first_name} ${profile.last_name} profile portrait`} className="h-full w-full object-cover object-center grayscale-[8%]" loading="eager" />
             </div>
           </motion.div>
-          <div className="relative mt-8 grid grid-cols-3 gap-3">
+          <div className="relative mt-8 grid grid-cols-3 gap-2 sm:gap-3">
             {stats.map(([value, label], index) => (
-              <motion.div key={label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.36 + index * 0.08, duration: 0.55, ease: smoothEase }} className="motion-card rounded-lg border border-black/[0.08] bg-[#F6F1EA]/70 px-4 py-4 text-center shadow-[0_16px_45px_rgba(17,17,17,0.06)] backdrop-blur">
-                <p className="text-2xl font-black leading-none">{value}</p>
+              <motion.div key={label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.36 + index * 0.08, duration: 0.55, ease: smoothEase }} className="motion-card rounded-lg border border-black/[0.08] bg-[#F6F1EA]/70 px-2 py-3 text-center shadow-[0_16px_45px_rgba(17,17,17,0.06)] backdrop-blur sm:px-4 sm:py-4">
+                <p className="text-xl font-black leading-none sm:text-2xl">{value}</p>
                 <p className="mt-2 text-[0.64rem] font-bold uppercase leading-4 tracking-[0.14em] text-[#888888]">{label}</p>
               </motion.div>
             ))}
           </div>
           <div className="relative mx-auto mt-5 max-w-sm rounded-full border border-black/[0.08] bg-black/[0.035] px-5 py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#666666]">
-            Next.js | Supabase | Motion
+            MERN | TypeScript | AI Integrations
           </div>
         </motion.div>
         </div>
@@ -368,14 +480,9 @@ export function PortfolioPage() {
       </section>
 
       <section id="about" className="bg-[#EFE7DD]">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:py-32">
-          <motion.div {...fadeUp} className="relative mx-auto aspect-square w-full max-w-[24rem] self-center rounded-full border border-black/[0.08] bg-[#F6F1EA] p-3 shadow-[0_28px_80px_rgba(17,17,17,0.10)]">
-            <div className="h-full w-full overflow-hidden rounded-full border border-black/[0.08] bg-black/[0.04]">
-              <img src={profileImageSrc} alt={`Portrait of ${profile.first_name} ${profile.last_name}`} className="h-full w-full object-cover object-center" loading="lazy" />
-            </div>
-          </motion.div>
-          <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.08 }} className="self-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">About</p>
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-6 lg:py-32">
+          <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.08 }} className="max-w-5xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Professional Profile</p>
             <h2 className="mt-5 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-[0.035em] sm:text-6xl">
               {profile.about_heading}
             </h2>
@@ -383,12 +490,32 @@ export function PortfolioPage() {
               {profile.about_body}
             </p>
             <div className="mt-9 grid gap-4 sm:grid-cols-2">
-              {["Full-stack product builds", "Premium personal brand websites", "Admin dashboards and CMS workflows", "Supabase auth, database, and storage"].map((item, index) => (
+              {["MERN production features", "JWT auth, middleware, and RBAC", "OpenAI API and AI agent workflows", "Remote, on-site, contract, and internship availability"].map((item, index) => (
                 <motion.div key={item} {...scaleIn} transition={{ ...scaleIn.transition, delay: index * 0.06 }} className="motion-card flex items-center gap-3 rounded-lg border border-black/[0.08] bg-[#F6F1EA]/65 px-4 py-4 text-sm font-semibold">
                   <MoveUpRight className="h-4 w-4 text-[#D6453D]" />
                   {item}
                 </motion.div>
               ))}
+            </div>
+            <div className="mt-10 grid gap-4 lg:grid-cols-4">
+              {engineeringFocus.map((item, index) => {
+                const Icon = item.icon;
+
+                return (
+                  <motion.article
+                    key={item.title}
+                    {...scaleIn}
+                    transition={{ ...scaleIn.transition, delay: 0.12 + index * 0.06 }}
+                    className="motion-card rounded-lg border border-black/[0.08] bg-[#F6F1EA]/75 p-5 shadow-[0_16px_45px_rgba(17,17,17,0.05)]"
+                  >
+                    <div className="flex h-11 w-11 items-center justify-center rounded-md bg-[#111111] text-white shadow-[0_12px_28px_rgba(17,17,17,0.18)]">
+                      <Icon className="h-5 w-5 text-[#F0B429]" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-black tracking-[0.02em]">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-[#666666]">{item.text}</p>
+                  </motion.article>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -396,8 +523,8 @@ export function PortfolioPage() {
 
       <section id="experience" className="mx-auto max-w-7xl px-5 py-24 sm:px-6 lg:py-32">
         <motion.div {...fadeUp} className="mb-14 max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Experience</p>
-          <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[0.035em] sm:text-6xl">Selected timeline</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Experience & Education</p>
+          <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[0.035em] sm:text-6xl">Career Timeline</h2>
         </motion.div>
         <div className="relative grid gap-8 border-l border-black/[0.12] pl-7 md:ml-4">
           {experience.map((item, index) => (
@@ -416,16 +543,20 @@ export function PortfolioPage() {
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-6 lg:py-32">
           <motion.div {...fadeUp} className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Projects</p>
-              <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[0.035em] sm:text-6xl">Recent work</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Selected Work</p>
+              <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[0.035em] sm:text-6xl">Portfolio Projects</h2>
             </div>
             <p className="max-w-sm text-sm leading-7 text-[#666666]">
-              Click any project image for a smooth zoom preview with backdrop blur and keyboard close support.
+              CV-aligned projects covering MERN platforms, AI SaaS, CMS websites, business systems, and this portfolio app.
             </p>
           </motion.div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project, index) => (
+            {featuredProjects.map((project, index) => {
+              const relatedBlogSlug = projectBlogSlugs[project.slug];
+              const relatedBlog = relatedBlogSlug ? blogBySlug.get(relatedBlogSlug) : null;
+
+              return (
               <motion.article
                 key={project.id}
                 {...fadeUp}
@@ -473,7 +604,7 @@ export function PortfolioPage() {
                       ))}
                     </div>
                   ) : null}
-                  <div className="mt-6 flex gap-2">
+                  <div className="mt-6 flex flex-wrap gap-2">
                     {project.github_url ? (
                       <a href={project.github_url} target="_blank" rel="noreferrer" aria-label={`${project.title} GitHub`} className="flex h-10 w-10 items-center justify-center rounded-md border border-black/[0.1] text-[#111111] transition hover:border-[#D6453D] hover:bg-[#D6453D] hover:text-white">
                         <Github className="h-5 w-5" />
@@ -484,24 +615,51 @@ export function PortfolioPage() {
                         <ExternalLink className="h-5 w-5" />
                       </a>
                     ) : null}
+                    {relatedBlog ? (
+                      <a href={`/blog/${relatedBlog.slug}`} aria-label={`${project.title} related blog`} className="inline-flex h-10 min-w-36 flex-1 items-center justify-center gap-2 rounded-md border border-black/[0.1] px-3 text-sm font-semibold text-[#111111] transition hover:border-[#D6453D] hover:bg-[#D6453D] hover:text-white">
+                        <BookOpen className="h-4 w-4" />
+                        Related blog
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               </motion.article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       <section id="skills" className="mx-auto max-w-7xl px-5 py-24 sm:px-6 lg:py-32">
         <motion.div {...fadeUp} className="mb-12 max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Skills</p>
-          <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[0.035em] sm:text-6xl">Technical stack</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Technical Skills</p>
+          <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[0.035em] sm:text-6xl">CV Skill Matrix</h2>
+          <p className="mt-6 text-base leading-8 text-[#666666]">
+            MERN, AI integration, authentication, databases, deployment, and frontend delivery from my current CV stack.
+          </p>
         </motion.div>
-        <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.08 }} className="flex flex-wrap gap-3">
+        <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.08 }} className="grid gap-4 md:grid-cols-2">
           {skills.map((skill, index) => (
-            <motion.span key={skill} {...scaleIn} transition={{ ...scaleIn.transition, delay: index * 0.018 }} whileHover={{ y: -4, scale: 1.03 }} className="rounded-full border border-black/[0.08] bg-black/[0.04] px-5 py-3 text-sm font-semibold text-[#111111] shadow-[0_14px_40px_rgba(17,17,17,0.04)]">
-              {skill}
-            </motion.span>
+            <motion.div
+              key={skill}
+              {...scaleIn}
+              transition={{ ...scaleIn.transition, delay: index * 0.025 }}
+              className="motion-card rounded-lg border border-black/[0.08] bg-black/[0.035] p-4 shadow-[0_16px_45px_rgba(17,17,17,0.05)]"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-sm font-black text-[#111111]">{skill}</p>
+                <span className="text-xs font-bold text-[#D6453D]">{skillLevels[skill] ?? 78}%</span>
+              </div>
+              <div className="mt-3 h-3 overflow-hidden rounded-full bg-black/[0.08]">
+                <motion.div
+                  className="skill-bar h-full rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${skillLevels[skill] ?? 78}%` }}
+                  viewport={{ once: true, amount: 0.7 }}
+                  transition={{ duration: 1.05, delay: index * 0.035, ease: smoothEase }}
+                />
+              </div>
+            </motion.div>
           ))}
         </motion.div>
       </section>
@@ -511,10 +669,10 @@ export function PortfolioPage() {
           <motion.div {...fadeUp}>
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Contact</p>
             <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[0.035em] sm:text-6xl">
-              Let&apos;s build something precise.
+              Let&apos;s discuss full-stack or AI-integrated work.
             </h2>
             <p className="mt-7 max-w-xl text-base leading-8 text-white/65">
-              Send a short note about your project, timeline, and goals. The form validates input and sends through the existing server action.
+              Available for remote or on-site work, full-time, part-time, contract, internships, entry-level full-stack roles, and AI-integrated development.
             </p>
             <a href={`mailto:${profile.email}`} className="mt-9 inline-flex items-center gap-3 text-sm font-semibold text-white/80 transition hover:text-white">
               <Mail className="h-4 w-4 text-[#D6453D]" />

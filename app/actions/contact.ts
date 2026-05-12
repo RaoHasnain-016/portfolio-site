@@ -56,7 +56,11 @@ export async function sendContactMessage(
   });
 
   if (!response.ok) {
-    return { ok: false, message: "Message failed to send. Please try again." };
+    const result = (await response.json().catch(() => null)) as { message?: string } | null;
+    return {
+      ok: false,
+      message: result?.message || "Message failed to send. Please try again.",
+    };
   }
 
   return { ok: true, message: "Message sent. I will get back to you soon." };

@@ -23,7 +23,14 @@ async function getPosts() {
       return fallbackBlogPosts;
     }
 
-    return data as BlogPost[];
+    const seen = new Set<string>();
+    return [...fallbackBlogPosts, ...(data as BlogPost[])].filter((post) => {
+      if (seen.has(post.slug)) {
+        return false;
+      }
+      seen.add(post.slug);
+      return true;
+    });
   } catch {
     return fallbackBlogPosts;
   }

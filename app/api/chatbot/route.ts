@@ -24,7 +24,31 @@ function isContactIntent(message: string) {
   return /\b(contact|email|mail|phone|number|hire|project|order|quote|budget|call|whatsapp|available)\b/i.test(message);
 }
 
+function isStackAdviceIntent(message: string) {
+  return /\b(best|suggest|recommend|recommendation|stack|technology|tech|framework|database|backend|frontend|saas|app|website|cms|dashboard|ai)\b/i.test(message);
+}
+
+function createStackAdvice(message: string) {
+  if (/\b(ai|agent|chatbot|llm|openai|career|saas)\b/i.test(message)) {
+    return "For an AI SaaS or chatbot product, a strong stack is Next.js or React, TypeScript, Node.js/Nest.js, MongoDB or PostgreSQL, OpenAI API, JWT auth, Tailwind CSS, and Vercel. Hasnain can help structure prompts, AI agent flows, dashboards, and deployment.";
+  }
+
+  if (/\b(admin|dashboard|business|erp|crm|construction|invoice|analytics)\b/i.test(message)) {
+    return "For an admin dashboard or business system, use React/Next.js, TypeScript, Node.js/Nest.js, PostgreSQL or MongoDB, JWT/RBAC, charting, audit-friendly APIs, and Tailwind CSS. This matches Hasnain's MERN, RBAC, REST API, and dashboard experience.";
+  }
+
+  if (/\b(cms|blog|portfolio|website|seo|landing|agriculture|crop)\b/i.test(message)) {
+    return "For a portfolio, CMS, or SEO website, use Next.js, TypeScript, Tailwind CSS, a CMS/data backend such as Supabase or MongoDB, optimized images, and Vercel deployment. Hasnain's CropMax and portfolio app fit this type of build.";
+  }
+
+  return "A practical default stack is TypeScript, React/Next.js, Node.js or Nest.js, MongoDB/PostgreSQL, JWT auth, Tailwind CSS, GitHub, and Vercel. If AI is needed, add OpenAI API and prompt workflows. Tell me the project type and I can suggest a tighter stack.";
+}
+
 function createLocalReply(message: string) {
+  if (isStackAdviceIntent(message)) {
+    return createStackAdvice(message);
+  }
+
   if (isContactIntent(message)) {
     return `You can contact ${resumeContext.name} at ${resumeContext.email} or ${resumeContext.phone}. For a project or order, send the project goals, timeline, and budget so Hasnain can respond with the next steps.`;
   }
@@ -87,7 +111,8 @@ If a visitor wants to hire, order a project, request a quote, or discuss work, s
 Email: ${resumeContext.email}
 Phone: ${resumeContext.phone}
 Ask them to include project goals, timeline, and budget.
-Keep replies concise, professional, friendly, and under 120 words.
+Keep replies concise, professional, friendly, and under 160 words.
+You may give practical software stack suggestions when visitors ask which stack, framework, database, architecture, or tools are best for a project. Tie the recommendation to Hasnain's skills: MERN, TypeScript, REST APIs, JWT/RBAC, MongoDB, Firebase Firestore, OpenAI API, AI agents, Tailwind, GitHub, Vercel, and Netlify.
 If the question is unrelated to Hasnain, his work, projects, skills, services, hiring, or contact, politely redirect to portfolio-related questions.
 
 Context:
@@ -233,7 +258,7 @@ export async function POST(request: NextRequest) {
                   content: message,
                 },
               ],
-              max_tokens: 220,
+              max_tokens: 360,
               temperature: 0.35,
             }
           : {
@@ -249,7 +274,7 @@ export async function POST(request: NextRequest) {
                   content: message,
                 },
               ],
-              max_output_tokens: 220,
+              max_output_tokens: 360,
               temperature: 0.35,
               store: false,
             }

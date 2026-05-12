@@ -43,7 +43,11 @@ export async function POST(request: NextRequest) {
   });
 
   if (!response.ok) {
-    return NextResponse.json({ error: "Message failed to send." }, { status: 500 });
+    const result = (await response.json().catch(() => null)) as { message?: string } | null;
+    return NextResponse.json(
+      { error: result?.message || "Message failed to send." },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ ok: true });

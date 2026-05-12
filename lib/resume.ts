@@ -2,8 +2,8 @@ export const resumeContext = {
   name: "M Hasnain",
   title: "Full Stack Developer (MERN), AI Engineer, Founder",
   location: "Vehari, Punjab, Pakistan",
-  email: "mhksmm155@gmail.com",
-  phone: "+92 304 683 8346",
+  email: "hasnain.devconnect@gmail.com",
+  phone: "+92 329 124 8155",
   websites: ["mhksmm.site", "devconnect.codes"],
   linkedin: "linkedin.com/in/m-hasnain",
   summary:
