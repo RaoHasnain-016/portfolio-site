@@ -8,7 +8,7 @@ export const defaultProfile: PortfolioProfile = {
   roles: ["Full Stack Developer (MERN)", "AI Engineer", "System Architecture Learner", "Founder of DevConnect"],
   hero_description:
     "Results-driven developer from Vehari, Pakistan, building scalable MERN applications, AI-powered SaaS tools, secure REST APIs, RBAC dashboards, and client-ready business systems with JavaScript, TypeScript, React, Node.js, MongoDB, and OpenAI integrations.",
-  about_heading: "Full-stack engineering focused on MERN products, AI workflows, and business systems.",
+  about_heading: "MERN developer building practical web apps, AI workflows, and business systems.",
   about_body:
     "I am a BS Computer Software Engineering student at COMSATS University Islamabad, Vehari Campus, and a results-driven developer focused on MERN applications, REST APIs, JWT authentication, RBAC dashboards, AI agents, prompt engineering, and polished responsive interfaces. I founded DevConnect and Career Compass AI, and I am available for remote, on-site, full-time, part-time, contract, internship, and entry-level full-stack roles.",
   profile_image_url: "/images/profile.png",

@@ -103,6 +103,13 @@ const heroSignals = [
   "Available for full-stack and AI-integrated roles",
 ];
 
+const profileFacts = [
+  ["Location", "Vehari, Punjab, Pakistan"],
+  ["Education", "BS Computer Software Engineering"],
+  ["Current Role", "Full Stack Engineer at CodeAlpha"],
+  ["Focus", "MERN apps, AI SaaS, dashboards"],
+];
+
 const projectBlogSlugs: Record<string, string> = {
   devconnect: "devconnect-platform-architecture",
   "career-compass-ai": "career-compass-ai-roadmaps",
@@ -481,43 +488,58 @@ export function PortfolioPage() {
 
       <section id="about" className="bg-[#EFE7DD]">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-6 lg:py-32">
-          <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.08 }} className="max-w-5xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Professional Profile</p>
-            <h2 className="mt-5 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-[0.035em] sm:text-6xl">
-              {profile.about_heading}
-            </h2>
-            <p className="mt-7 max-w-3xl text-lg leading-9 text-[#666666]">
-              {profile.about_body}
-            </p>
-            <div className="mt-9 grid gap-4 sm:grid-cols-2">
-              {["MERN production features", "JWT auth, middleware, and RBAC", "OpenAI API and AI agent workflows", "Remote, on-site, contract, and internship availability"].map((item, index) => (
-                <motion.div key={item} {...scaleIn} transition={{ ...scaleIn.transition, delay: index * 0.06 }} className="motion-card flex items-center gap-3 rounded-lg border border-black/[0.08] bg-[#F6F1EA]/65 px-4 py-4 text-sm font-semibold">
-                  <MoveUpRight className="h-4 w-4 text-[#D6453D]" />
-                  {item}
-                </motion.div>
-              ))}
+          <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.08 }} className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#D6453D]">Professional Profile</p>
+              <h2 className="mt-5 max-w-3xl text-[clamp(2.25rem,5vw,4.8rem)] font-black uppercase leading-[0.98] tracking-[0.02em]">
+                {profile.about_heading}
+              </h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-[#555555] sm:text-lg">
+                {profile.about_body}
+              </p>
             </div>
-            <div className="mt-10 grid gap-4 lg:grid-cols-4">
-              {engineeringFocus.map((item, index) => {
-                const Icon = item.icon;
 
-                return (
-                  <motion.article
-                    key={item.title}
-                    {...scaleIn}
-                    transition={{ ...scaleIn.transition, delay: 0.12 + index * 0.06 }}
-                    className="motion-card rounded-lg border border-black/[0.08] bg-[#F6F1EA]/75 p-5 shadow-[0_16px_45px_rgba(17,17,17,0.05)]"
-                  >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-md bg-[#111111] text-white shadow-[0_12px_28px_rgba(17,17,17,0.18)]">
-                      <Icon className="h-5 w-5 text-[#F0B429]" />
-                    </div>
-                    <h3 className="mt-5 text-lg font-black tracking-[0.02em]">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[#666666]">{item.text}</p>
-                  </motion.article>
-                );
-              })}
+            <div className="grid gap-5">
+              <div className="grid gap-3 rounded-lg border border-black/[0.08] bg-[#F6F1EA]/70 p-5 shadow-[0_18px_55px_rgba(17,17,17,0.06)]">
+                {profileFacts.map(([label, value]) => (
+                  <div key={label} className="flex items-start justify-between gap-4 border-b border-black/[0.06] pb-3 last:border-b-0 last:pb-0">
+                    <span className="text-xs font-bold uppercase text-[#888888]">{label}</span>
+                    <span className="max-w-[14rem] text-right text-sm font-semibold leading-6 text-[#111111]">{value}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                {["MERN production features", "JWT auth, middleware, and RBAC", "OpenAI API and AI agent workflows", "Remote, on-site, contract, and internship availability"].map((item, index) => (
+                  <motion.div key={item} {...scaleIn} transition={{ ...scaleIn.transition, delay: index * 0.06 }} className="motion-card flex items-center gap-3 rounded-lg border border-black/[0.08] bg-[#F6F1EA]/65 px-4 py-4 text-sm font-semibold">
+                    <MoveUpRight className="h-4 w-4 shrink-0 text-[#D6453D]" />
+                    {item}
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {engineeringFocus.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <motion.article
+                  key={item.title}
+                  {...scaleIn}
+                  transition={{ ...scaleIn.transition, delay: 0.12 + index * 0.06 }}
+                  className="motion-card rounded-lg border border-black/[0.08] bg-[#F6F1EA]/75 p-5 shadow-[0_16px_45px_rgba(17,17,17,0.05)]"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-md bg-[#111111] text-white shadow-[0_12px_28px_rgba(17,17,17,0.18)]">
+                    <Icon className="h-5 w-5 text-[#F0B429]" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-black tracking-[0.02em]">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#666666]">{item.text}</p>
+                </motion.article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
