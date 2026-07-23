@@ -13,12 +13,9 @@ import {
   Code2,
   Database,
   ExternalLink,
-  Facebook,
   Github,
-  Instagram,
   Linkedin,
   Mail,
-  Music2,
   MoveUpRight,
   ShieldCheck,
   type LucideIcon,
@@ -27,47 +24,44 @@ import { ContactForm } from "@/components/ContactForm";
 import { ImageZoomModal } from "@/components/ImageZoomModal";
 import { Navbar } from "@/components/Navbar";
 import { PortfolioChatbot } from "@/components/PortfolioChatbot";
+import { ProfilePortrait } from "@/components/ProfilePortrait";
 import { fallbackBlogPosts } from "@/lib/blogs";
 import { defaultProfile } from "@/lib/profile";
 import { fallbackProjects } from "@/lib/projects";
 import type { Project } from "@/types/project";
 import type { PortfolioProfile } from "@/types/profile";
 
-const cvProfileFields = {
-  eyebrow: defaultProfile.eyebrow,
-  roles: defaultProfile.roles,
-  hero_description: defaultProfile.hero_description,
-  about_heading: defaultProfile.about_heading,
-  about_body: defaultProfile.about_body,
-  skills: defaultProfile.skills,
-  marquee_items: defaultProfile.marquee_items,
-};
-
 const experience = [
   {
-    period: "Jan 2026 - Present",
-    title: "Full Stack Engineer",
-    company: "CodeAlpha",
-    text: "Building production MERN features with TypeScript and JavaScript, including REST APIs, JWT auth, middleware, MongoDB data models, and modular React interfaces.",
+    period: "2025 - 2026",
+    title: "Founder & Full Stack Developer",
+    company: "DevConnect",
+    text: "Solo-built a developer collaboration web platform from system architecture to deployment with TypeScript backend, RBAC, JWT authentication, and responsive React dashboards.",
   },
   {
-    period: "2026 - Present",
-    title: "Founder",
-    company: "DevConnect and Career Compass AI",
-    text: "Designing full-stack products around developer collaboration, AI-assisted career guidance, OpenAI integrations, prompt engineering, and multi-step AI workflows.",
+    period: "2026",
+    title: "Creator",
+    company: "Agentic QA",
+    text: "Built an in-house agentic QA product that automatically tests and evaluates chatbot responses for accuracy, relevance, and consistency using Django, Python, and React.",
   },
   {
-    period: "2023 - 2027",
+    period: "2025 - 2026",
+    title: "Final Year Project Lead",
+    company: "Career Compass AI",
+    text: "Developed an AI-powered web platform with a personalized recommendation engine, FastAPI backend, PostgreSQL, Firebase Auth, and GPT-powered chatbot for career guidance.",
+  },
+  {
+    period: "Feb 2023 - Apr 2027",
     title: "BS Computer Software Engineering",
     company: "COMSATS University Islamabad, Vehari Campus",
-    text: "Studying software engineering while building real production projects across frontend, backend, databases, authentication, and AI-integrated development.",
+    text: "8th semester · CGPA 3.34/4.00. Building production projects across MERN, Django, FastAPI, AI/ML integration, and full-stack web systems.",
   },
 ];
 
 const stats = [
-  ["5", "Portfolio projects"],
-  ["18+", "Core skills"],
-  ["2026", "CodeAlpha"],
+  ["7+", "Key projects"],
+  ["24+", "Core skills"],
+  ["3.34", "CGPA / 4.00"],
 ];
 
 const engineeringFocus: {
@@ -76,67 +70,81 @@ const engineeringFocus: {
   icon: LucideIcon;
 }[] = [
   {
-    title: "Backend Reliability",
-    text: "REST APIs, JWT auth, middleware, validation, RBAC, and MongoDB data models built for real workflows.",
+    title: "Full Stack Engineering",
+    text: "MERN Stack, Django, FastAPI, REST APIs, JWT auth, RBAC, and PostgreSQL/MongoDB data models for production workflows.",
     icon: ShieldCheck,
   },
   {
-    title: "AI Product Workflows",
-    text: "OpenAI API integration, prompt design, multi-step agent flows, assessments, and roadmap generation.",
+    title: "AI & ML Integration",
+    text: "OpenAI & Gemini APIs, prompt engineering, Agentic QA, LLM evaluation, chatbot accuracy testing, and AI agent pipelines.",
     icon: BrainCircuit,
   },
   {
     title: "Frontend Systems",
-    text: "Responsive React interfaces, reusable components, Tailwind systems, motion, and admin-ready UX.",
+    text: "React, Next.js, Angular, Tailwind CSS, responsive design, Framer Motion, and polished admin-ready interfaces.",
     icon: Code2,
   },
   {
     title: "Data & Deployment",
-    text: "Database-backed content, Firebase/Supabase-style workflows, GitHub, Vercel, Netlify, and production handoff.",
+    text: "Supabase, Firebase, PostgreSQL, MySQL, GitHub workflows, Vercel deployment, and production handoff.",
     icon: Database,
   },
 ];
 
 const heroSignals = [
-  "Production MERN features at CodeAlpha",
-  "Founder of DevConnect and Career Compass AI",
-  "Available for full-stack and AI-integrated roles",
+  "Founder of DevConnect · Creator of Agentic QA",
+  "Career Compass AI — Final Year Project with FastAPI & GPT",
+  "Available on-site, remote, or hybrid — immediate",
 ];
 
 const profileFacts = [
-  ["Location", "Vehari, Punjab, Pakistan"],
-  ["Education", "BS Computer Software Engineering"],
-  ["Current Role", "Full Stack Engineer at CodeAlpha"],
-  ["Focus", "MERN apps, AI SaaS, dashboards"],
+  ["Location", "Lahore, Pakistan"],
+  ["Education", "BS CSE · COMSATS Vehari · CGPA 3.34"],
+  ["Portfolio", "hasnainofficial.codes"],
+  ["Focus", "MERN, Django, FastAPI, AI/ML"],
 ];
 
 const projectBlogSlugs: Record<string, string> = {
   devconnect: "devconnect-platform-architecture",
   "career-compass-ai": "career-compass-ai-roadmaps",
+  "agentic-qa": "agentic-qa-chatbot-evaluation",
+  "survey-online": "survey-online-platform",
+  vspark: "vspark-event-management",
   cropmax: "cropmax-agriculture-cms",
-  "construction-company-business-software": "construction-business-software-dashboards",
-  "portfolio-admin-app": "portfolio-admin-app-content-system",
+  "construction-management-system": "construction-business-software-dashboards",
 };
 
 const skillLevels: Record<string, number> = {
-  JavaScript: 92,
-  TypeScript: 88,
   "React.js": 92,
+  "Next.js": 90,
+  Angular: 78,
   "Tailwind CSS": 90,
+  Bootstrap: 82,
   "Node.js": 88,
   "Express.js": 86,
   "Nest.js": 78,
+  Django: 84,
+  FastAPI: 86,
+  Python: 88,
+  PHP: 72,
+  Laravel: 74,
   MongoDB: 86,
-  "Firebase Firestore": 78,
+  PostgreSQL: 84,
+  Supabase: 86,
+  MySQL: 80,
+  "Firebase Firestore": 82,
+  "OpenAI API": 86,
+  "Gemini API": 82,
+  "Prompt Engineering": 88,
+  "Agentic QA": 84,
   "JWT Authentication": 88,
   "REST API Design": 88,
-  "OpenAI API": 84,
-  "AI Agent Development": 80,
-  "Prompt Engineering": 86,
+  RBAC: 86,
   Git: 84,
   GitHub: 84,
-  Vercel: 82,
-  Netlify: 78,
+  Postman: 82,
+  Figma: 76,
+  Vercel: 84,
 };
 
 const socialPlatforms: {
@@ -145,23 +153,13 @@ const socialPlatforms: {
   icon: LucideIcon;
   color: string;
 }[] = [
-  { name: "LinkedIn", href: "https://linkedin.com", icon: Linkedin, color: "#0A66C2" },
-  { name: "GitHub", href: "https://github.com", icon: Github, color: "#111111" },
-  { name: "TikTok", href: "https://tiktok.com", icon: Music2, color: "#111111" },
-  { name: "Facebook", href: "https://facebook.com", icon: Facebook, color: "#1877F2" },
-  { name: "Instagram", href: "https://instagram.com", icon: Instagram, color: "#D6453D" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/m-hasnain-b600b8327/", icon: Linkedin, color: "#0A66C2" },
+  { name: "GitHub", href: "https://github.com/RaoHasnain-016", icon: Github, color: "#111111" },
+  { name: "Portfolio", href: "https://www.hasnainofficial.codes/", icon: ExternalLink, color: "#D6453D" },
+  { name: "Email", href: "mailto:hasnain.devconnect@gmail.com", icon: Mail, color: "#111111" },
 ];
 
 const smoothEase = [0.22, 1, 0.36, 1] as const;
-
-function imageWithVersion(src: string, version?: string) {
-  if (!src || !version) {
-    return src;
-  }
-
-  const separator = src.includes("?") ? "&" : "?";
-  return `${src}${separator}v=${encodeURIComponent(version)}`;
-}
 
 function mergeProjectsWithCvProjects(projects: Project[]) {
   const seen = new Set<string>();
@@ -175,15 +173,18 @@ function mergeProjectsWithCvProjects(projects: Project[]) {
   });
 }
 
-function applyCvProfile(profile: PortfolioProfile): PortfolioProfile {
-  return {
-    ...profile,
-    ...cvProfileFields,
-    email: defaultProfile.email,
-    social_links: profile.social_links.length ? profile.social_links : defaultProfile.social_links,
-    profile_image_url: profile.profile_image_url || defaultProfile.profile_image_url,
-  };
+function resolveProfileImage(url: string) {
+  if (!url || url === "/images/profile.png") {
+    return defaultProfile.profile_image_url;
+  }
+
+  return url;
 }
+
+type PortfolioPageProps = {
+  initialProfile?: PortfolioProfile;
+  initialProjects?: Project[];
+};
 
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
@@ -271,9 +272,9 @@ function CustomCursor() {
   );
 }
 
-export function PortfolioPage() {
-  const [projects, setProjects] = useState<Project[]>(fallbackProjects);
-  const [profile, setProfile] = useState<PortfolioProfile>(defaultProfile);
+export function PortfolioPage({ initialProfile = defaultProfile, initialProjects = fallbackProjects }: PortfolioPageProps) {
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const profile = initialProfile;
   const [zoomImage, setZoomImage] = useState<{ src: string; alt: string } | null>(null);
   const [roleIndex, setRoleIndex] = useState(0);
   const [typedRole, setTypedRole] = useState("");
@@ -281,7 +282,7 @@ export function PortfolioPage() {
   useEffect(() => {
     let cancelled = false;
 
-    async function loadProjects() {
+    async function refreshProjects() {
       try {
         const response = await fetch("/api/projects", { cache: "no-store" });
         if (!response.ok) {
@@ -293,28 +294,11 @@ export function PortfolioPage() {
           setProjects(mergeProjectsWithCvProjects(data));
         }
       } catch {
-        setProjects(fallbackProjects);
+        // Keep server-provided initial data.
       }
     }
 
-    async function loadProfile() {
-      try {
-        const response = await fetch("/api/profile", { cache: "no-store" });
-        if (!response.ok) {
-          return;
-        }
-
-        const data = (await response.json()) as PortfolioProfile;
-        if (!cancelled) {
-          setProfile(applyCvProfile(data));
-        }
-      } catch {
-        setProfile(defaultProfile);
-      }
-    }
-
-    loadProjects();
-    loadProfile();
+    refreshProjects();
 
     return () => {
       cancelled = true;
@@ -354,7 +338,7 @@ export function PortfolioPage() {
     () => new Map(fallbackBlogPosts.map((post) => [post.slug, post])),
     []
   );
-  const profileImageSrc = imageWithVersion(profile.profile_image_url, profile.updated_at);
+  const profileImageSrc = resolveProfileImage(profile.profile_image_url);
   const socialLabels = profile.social_links.length
     ? profile.social_links
     : socialPlatforms.map((social) => social.name);
@@ -384,17 +368,17 @@ export function PortfolioPage() {
         <div className="absolute bottom-20 left-[18%] h-24 w-72 rotate-[6deg] rounded-[1.25rem] border border-black/[0.04] bg-[#D6453D]/[0.055]" />
       </motion.div>
 
-      <section id="home" className="relative min-h-screen overflow-hidden pb-32 pt-24 sm:pt-28">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-6 lg:min-h-[calc(100vh-12rem)] lg:grid-cols-[1.04fr_0.96fr]">
-          <motion.div initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: smoothEase }}>
-            <p className="inline-flex max-w-full rounded-full bg-black/[0.04] px-4 py-2.5 text-[0.68rem] font-semibold uppercase text-[#D6453D] sm:px-5 sm:py-3 sm:text-xs">
+      <section id="home" className="relative min-h-screen overflow-hidden pb-28 pt-20 sm:pb-32 sm:pt-24 lg:pt-28">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:gap-12 sm:px-6 lg:min-h-[calc(100vh-12rem)] lg:grid-cols-[1.04fr_0.96fr] lg:gap-14">
+          <motion.div initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: smoothEase }} className="order-2 lg:order-1">
+            <p className="inline-flex max-w-full rounded-full bg-black/[0.04] px-4 py-2.5 text-[0.68rem] font-semibold uppercase leading-relaxed text-[#D6453D] sm:px-5 sm:py-3 sm:text-xs">
               {profile.eyebrow}
             </p>
-            <h1 className="mt-6 max-w-5xl text-[clamp(3rem,16vw,8.25rem)] font-black uppercase leading-[0.86] tracking-[0.03em] sm:mt-7">
+            <h1 className="mt-5 max-w-5xl text-[clamp(2.4rem,11vw,7rem)] font-black uppercase leading-[0.9] tracking-[0.03em] sm:mt-7 sm:leading-[0.86]">
               {profile.first_name}
               <span className="block text-[#D6453D]">{profile.last_name}</span>
             </h1>
-            <div className="mt-7 flex min-h-9 items-center text-lg font-semibold text-[#111111] sm:text-2xl">
+            <div className="mt-5 flex min-h-9 items-center text-base font-semibold text-[#111111] sm:mt-7 sm:text-xl lg:text-2xl">
               <span>{typedRole}</span>
               <span className="ml-1 h-7 w-[2px] animate-pulse bg-[#D6453D]" />
             </div>
@@ -445,14 +429,18 @@ export function PortfolioPage() {
             </motion.div>
           </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.85, ease: smoothEase }} className="relative mx-auto w-full max-w-[28rem] lg:max-w-[34rem]">
-          <motion.div className="absolute inset-x-8 top-10 h-[28rem] rounded-full bg-[#D6453D]/10 blur-3xl" animate={{ scale: [1, 1.04, 1], opacity: [0.7, 0.95, 0.7] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
-          <motion.div whileHover={{ y: -8, rotate: -1.2 }} transition={{ duration: 0.45, ease: smoothEase }} className="relative mx-auto aspect-square w-full max-w-[27.5rem] rounded-full border border-black/[0.08] bg-[#EFE7DD] p-3 shadow-[0_35px_100px_rgba(17,17,17,0.12)]">
+        <motion.div initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.85, ease: smoothEase }} className="relative order-1 mx-auto w-full max-w-[20rem] sm:max-w-[24rem] lg:order-2 lg:max-w-[28rem] xl:max-w-[32rem]">
+          <motion.div className="absolute inset-x-8 top-10 h-[20rem] rounded-full bg-[#D6453D]/10 blur-3xl sm:h-[24rem] lg:h-[28rem]" animate={{ scale: [1, 1.04, 1], opacity: [0.7, 0.95, 0.7] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
+          <motion.div whileHover={{ y: -8, rotate: -1.2 }} transition={{ duration: 0.45, ease: smoothEase }} className="relative mx-auto aspect-square w-full max-w-[20rem] rounded-full border border-black/[0.08] bg-[#EFE7DD] p-2.5 shadow-[0_35px_100px_rgba(17,17,17,0.12)] sm:max-w-[24rem] sm:p-3 lg:max-w-[27.5rem]">
             <div className="h-full w-full overflow-hidden rounded-full border border-black/[0.08] bg-black/[0.04]">
-              <img src={profileImageSrc} alt={`${profile.first_name} ${profile.last_name} profile portrait`} className="h-full w-full object-cover object-center grayscale-[8%]" loading="eager" />
+              <ProfilePortrait
+                src={profileImageSrc}
+                alt={`${profile.first_name} ${profile.last_name} professional portrait`}
+                className="h-full w-full"
+              />
             </div>
           </motion.div>
-          <div className="relative mt-8 grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="relative mt-6 grid grid-cols-3 gap-2 sm:mt-8 sm:gap-3">
             {stats.map(([value, label], index) => (
               <motion.div key={label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.36 + index * 0.08, duration: 0.55, ease: smoothEase }} className="motion-card rounded-lg border border-black/[0.08] bg-[#F6F1EA]/70 px-2 py-3 text-center shadow-[0_16px_45px_rgba(17,17,17,0.06)] backdrop-blur sm:px-4 sm:py-4">
                 <p className="text-xl font-black leading-none sm:text-2xl">{value}</p>
@@ -460,8 +448,8 @@ export function PortfolioPage() {
               </motion.div>
             ))}
           </div>
-          <div className="relative mx-auto mt-5 max-w-sm rounded-full border border-black/[0.08] bg-black/[0.035] px-5 py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#666666]">
-            MERN | TypeScript | AI Integrations
+          <div className="relative mx-auto mt-4 max-w-sm rounded-full border border-black/[0.08] bg-black/[0.035] px-4 py-2.5 text-center text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#666666] sm:mt-5 sm:px-5 sm:py-3 sm:text-xs sm:tracking-[0.18em]">
+            MERN · Django · FastAPI · AI/ML
           </div>
         </motion.div>
         </div>
@@ -510,7 +498,7 @@ export function PortfolioPage() {
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                {["MERN production features", "JWT auth, middleware, and RBAC", "OpenAI API and AI agent workflows", "Remote, on-site, contract, and internship availability"].map((item, index) => (
+                {["MERN, Django & FastAPI backends", "OpenAI, Gemini & Agentic QA workflows", "JWT auth, RBAC & PostgreSQL/MongoDB", "On-site, remote, hybrid — immediate availability"].map((item, index) => (
                   <motion.div key={item} {...scaleIn} transition={{ ...scaleIn.transition, delay: index * 0.06 }} className="motion-card flex items-center gap-3 rounded-lg border border-black/[0.08] bg-[#F6F1EA]/65 px-4 py-4 text-sm font-semibold">
                     <MoveUpRight className="h-4 w-4 shrink-0 text-[#D6453D]" />
                     {item}
@@ -569,7 +557,7 @@ export function PortfolioPage() {
               <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[0.035em] sm:text-6xl">Portfolio Projects</h2>
             </div>
             <p className="max-w-sm text-sm leading-7 text-[#666666]">
-              CV-aligned projects covering MERN platforms, AI SaaS, CMS websites, business systems, and this portfolio app.
+              CV-aligned projects covering AI platforms, MERN systems, Django tools, survey apps, and industry client work.
             </p>
           </motion.div>
 
@@ -657,7 +645,7 @@ export function PortfolioPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Technical Skills</p>
           <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[0.035em] sm:text-6xl">CV Skill Matrix</h2>
           <p className="mt-6 text-base leading-8 text-[#666666]">
-            MERN, AI integration, authentication, databases, deployment, and frontend delivery from my current CV stack.
+            MERN Stack, Django, FastAPI, Python, AI/ML integration, databases, and deployment from my current CV.
           </p>
         </motion.div>
         <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.08 }} className="grid gap-4 md:grid-cols-2">
@@ -690,12 +678,15 @@ export function PortfolioPage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-32">
           <motion.div {...fadeUp}>
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#D6453D]">Contact</p>
-            <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[0.035em] sm:text-6xl">
-              Let&apos;s discuss full-stack or AI-integrated work.
+            <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[0.035em] sm:text-5xl lg:text-6xl">
+              Let&apos;s discuss full-stack or AI/ML work.
             </h2>
             <p className="mt-7 max-w-xl text-base leading-8 text-white/65">
-              Available for remote or on-site work, full-time, part-time, contract, internships, entry-level full-stack roles, and AI-integrated development.
+              Available on-site, remote, or hybrid — immediate. Open to Full Stack Developer and AI/ML Developer roles.
             </p>
+            <a href="tel:+9230291248155" className="mt-6 inline-flex items-center gap-3 text-sm font-semibold text-white/80 transition hover:text-white">
+              <span className="text-[#D6453D]">+92 302 9124 8155</span>
+            </a>
             <a href={`mailto:${profile.email}`} className="mt-9 inline-flex items-center gap-3 text-sm font-semibold text-white/80 transition hover:text-white">
               <Mail className="h-4 w-4 text-[#D6453D]" />
               {profile.email}

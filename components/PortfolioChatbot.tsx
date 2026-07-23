@@ -16,7 +16,7 @@ const quickPrompts = [
 ];
 
 const starterMessage =
-  "Hi, I am Hasnain's AI assistant. Ask me about his CV, projects, hiring, or the best tech stack for your idea.";
+  "Hi, I am Hasnain's AI assistant. Ask about his CV, MERN/Django/FastAPI projects, AI/ML work, or how to hire him.";
 
 function CartoonBot({ compact = false }: { compact?: boolean }) {
   return (

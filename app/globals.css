@@ -629,3 +629,61 @@ textarea {
     0 0.25rem 0 #050505,
     0 1.5rem 2.6rem rgba(0, 0, 0, 0.45);
 }
+
+.profile-portrait {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.profile-portrait-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, #e8dfd4 8%, #f6f1ea 18%, #e8dfd4 33%);
+  background-size: 200% 100%;
+  animation: profile-shimmer 1.4s linear infinite;
+  transition: opacity 320ms ease;
+}
+
+.profile-portrait-skeleton-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.profile-portrait-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #efe7dd;
+}
+
+.profile-portrait-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.02);
+  transition:
+    opacity 420ms ease,
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.profile-portrait-image-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes profile-shimmer {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-shell section {
+    scroll-margin-top: 5.5rem;
+  }
+}

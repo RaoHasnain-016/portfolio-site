@@ -52,7 +52,7 @@ export async function PUT(request: NextRequest) {
       hero_description: body.hero_description,
       about_heading: body.about_heading,
       about_body: body.about_body,
-      profile_image_url: body.profile_image_url || "/images/profile.png",
+      profile_image_url: body.profile_image_url || "/images/profile.jpg",
       email: body.email,
       social_links: body.social_links || [],
       skills: body.skills || [],

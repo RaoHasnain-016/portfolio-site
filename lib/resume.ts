@@ -1,72 +1,102 @@
 export const resumeContext = {
   name: "M Hasnain",
-  title: "Full Stack Developer (MERN), AI Engineer, Founder",
-  location: "Vehari, Punjab, Pakistan",
+  title: "Full Stack Developer — MERN Stack, Django, AI/ML Enthusiast, Python",
+  location: "Lahore, Pakistan",
   email: "hasnain.devconnect@gmail.com",
-  phone: "+92 329 124 8155",
-  websites: ["mhksmm.site", "devconnect.codes"],
-  linkedin: "linkedin.com/in/m-hasnain",
+  phone: "+92 302 9124 8155",
+  websites: ["hasnainofficial.codes", "devconnect.codes"],
+  linkedin: "linkedin.com/in/m-hasnain-b600b8327/",
+  github: "github.com/RaoHasnain-016",
   summary:
-    "Results-driven Full Stack Developer with production experience building scalable MERN applications, AI-powered SaaS tools, and industry client systems. Founder of DevConnect and Career Compass AI. Skilled in JavaScript, TypeScript, system architecture, AI agent development, and LLM integration.",
+    "Full Stack Developer specializing in web development and AI/ML integration, with strong expertise in the MERN Stack, Django, and Python. Built Career Compass AI, an AI-powered web platform with a recommendation engine, FastAPI backend, and GPT-powered chatbot. Founder of DevConnect and creator of Agentic QA for evaluating chatbot accuracy using AI/ML techniques.",
   skills: [
-    "JavaScript",
-    "TypeScript",
     "React.js",
+    "Next.js",
+    "Angular",
     "Tailwind CSS",
     "Node.js",
     "Express.js",
     "Nest.js",
+    "Django",
+    "FastAPI",
+    "Python",
     "MongoDB",
-    "Firebase Firestore",
+    "PostgreSQL",
+    "Supabase",
+    "OpenAI API",
+    "Gemini API",
+    "Prompt Engineering",
+    "Agentic QA",
     "JWT Authentication",
     "REST API Design",
-    "OpenAI API",
-    "AI Agent Development",
-    "Prompt Engineering",
+    "RBAC",
     "Git",
     "GitHub",
+    "Figma",
     "Vercel",
-    "Netlify",
   ],
   experience: [
     {
-      role: "Full Stack Engineer",
-      company: "CodeAlpha",
-      period: "January 2026 - Present",
-      location: "Remote, Maharashtra, India",
+      role: "Founder & Full Stack Developer",
+      company: "DevConnect",
+      period: "2025 - 2026",
+      location: "Remote",
       highlights: [
-        "Built production features across the MERN stack using TypeScript and JavaScript.",
-        "Designed REST APIs with JWT auth, middleware, input validation, and MongoDB data modelling.",
-        "Developed modular React component libraries with Tailwind CSS.",
-        "Conducted code reviews, documented team workflows, and resolved performance bottlenecks.",
+        "Solo-built a developer collaboration web platform from system architecture to deployment.",
+        "Implemented TypeScript backend with RBAC, JWT authentication, and responsive React dashboards.",
+      ],
+    },
+    {
+      role: "Creator",
+      company: "Agentic QA",
+      period: "2026",
+      location: "Remote",
+      highlights: [
+        "Built an in-house agentic QA product that tests chatbot responses for accuracy, relevance, and consistency.",
+        "Designed Django/Python backend for automated test cases and React dashboard for performance metrics.",
       ],
     },
   ],
   projects: [
     {
+      name: "Career Compass AI",
+      description:
+        "AI-powered web platform with personalized recommendation engine, FastAPI backend, PostgreSQL, Firebase Auth, and GPT-powered chatbot.",
+    },
+    {
+      name: "Agentic QA",
+      description:
+        "AI chatbot accuracy and quality analysis tool with Django/Python backend and React dashboard.",
+    },
+    {
       name: "DevConnect",
       description:
-        "Developer collaboration platform with developer profiles, dashboards, JWT auth, RBAC, secure middleware, and scalable MERN architecture.",
+        "Developer collaboration web platform with TypeScript backend, RBAC, JWT auth, and React dashboards.",
       url: "devconnect.codes",
     },
     {
-      name: "Career Compass AI",
+      name: "Survey Online",
       description:
-        "AI-powered career SaaS using MERN, TypeScript, OpenAI API, prompt engineering, and multi-step AI agent workflows for assessments and learning roadmaps.",
+        "Full-stack survey platform with Next.js, Supabase, PostgreSQL for real-time survey creation and analysis.",
+    },
+    {
+      name: "vSpark",
+      description:
+        "University event management platform for COMSATS with registration, announcements, and admin panel.",
     },
     {
       name: "CropMax",
       description:
-        "Agriculture technology website with SEO-focused mobile UI, CMS admin dashboard, product management, and inquiries.",
+        "SEO-optimized agriculture web platform with Supabase/PostgreSQL data management and crop analytics.",
     },
     {
-      name: "Construction Company Business Software",
+      name: "Construction Management System",
       description:
-        "Business management system for project tracking, workforce management, invoices, RBAC, role dashboards, analytics, and billing.",
+        "Business management system covering project tracking, workforce, billing, and RBAC-secured dashboards.",
     },
   ],
   education:
-    "BS Computer Software Engineering, COMSATS University Islamabad, Vehari Campus, February 2023 - April 2027.",
+    "BS Computer Software Engineering, COMSATS University Islamabad Vehari Campus, Feb 2023 - Apr 2027. Semester 8, CGPA 3.34/4.00.",
   availability:
-    "Immediate availability for remote or on-site work, full-time, part-time, contract, internships, entry-level full-stack roles, and AI-integrated development.",
+    "On-site, Remote, or Hybrid — Immediate. Languages: English (Professional), Urdu (Native).",
 };
